@@ -12,6 +12,12 @@ inputs:
 outputs:
   account:
     description: Amazon account number.
+  username:
+    description: ECR docker username.
+  password:
+    description: ECR docker password.
+  registry:
+    description: ECR registry hostname (e.g. 000000000000.dkr.ecr.us-east-1.amazonaws.com)
 runs:
   using: node12
   main: 'main.js'
