@@ -24,7 +24,7 @@ function run(cmd, options = {}) {
 const authJson = run(`aws ecr get-authorization-token --region ${awsRegion}`);
 const auth = JSON.parse(authJson);
 
-if(!auth.authorizationData || !auth.authorizationData[0]) {
+if (!auth.authorizationData || !auth.authorizationData[0]) {
     throw new Error('Missing authorizationData in value returned by `aws ecr get-authorization-token`.');
 }
 const authToken = auth.authorizationData[0].authorizationToken;
@@ -38,7 +38,8 @@ core.setOutput('username', username);
 core.setOutput('password', password);
 core.setOutput('registry', registry);
 
-const accountData = run(`aws sts get-caller-identity --output json`);
-const awsAccountId = JSON.parse(accountData).Account;
+// this is broken?
+//const accountData = run(`aws sts get-caller-identity --output json`);
+//const awsAccountId = JSON.parse(accountData).Account;
 
-core.setOutput('account', awsAccountId);
+//core.setOutput('account', awsAccountId);
