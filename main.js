@@ -38,8 +38,8 @@ core.setOutput('username', username);
 core.setOutput('password', password);
 core.setOutput('registry', registry);
 
-// this is broken?
-//const accountData = run(`aws sts get-caller-identity --output json`);
-//const awsAccountId = JSON.parse(accountData).Account;
 
-//core.setOutput('account', awsAccountId);
+const accountData = run(`aws sts get-caller-identity --output json --region ${awsRegion}`);
+const awsAccountId = JSON.parse(accountData).Account;
+
+core.setOutput('account', awsAccountId);
