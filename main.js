@@ -32,7 +32,7 @@ const [username, password] = new Buffer(authToken, 'base64').toString('ascii').s
 const parsedProxyEndpoint = parseUrl(auth.authorizationData[0].proxyEndpoint);
 const registry = parsedProxyEndpoint.host;
 
-run(`docker login -u ${username} -p ${password} ${auth.authorizationData[0].proxyEndpoint}`);
+run(`docker login -u ${username} -p ${password} ${auth.authorizationData[0].proxyEndpoint}`, { hide: true });
 
 core.setOutput('username', username);
 core.setOutput('password', password);
