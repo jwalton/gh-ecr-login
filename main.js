@@ -1,5 +1,4 @@
 const { execSync } = require('child_process');
-const { parse: parseUrl } = require('url');
 const core = require('@actions/core');
 
 const AWS_ACCESS_KEY_ID = core.getInput('access-key-id', { required: true });
@@ -21,24 +20,13 @@ function run(cmd, options = {}) {
     });
 }
 
-const authJson = run(`aws ecr get-authorization-token --region ${awsRegion}`);
-const auth = JSON.parse(authJson);
-
-if (!auth.authorizationData || !auth.authorizationData[0]) {
-    throw new Error('Missing authorizationData in value returned by `aws ecr get-authorization-token`.');
-}
-const authToken = auth.authorizationData[0].authorizationToken;
-const [username, password] = new Buffer(authToken, 'base64').toString('ascii').split(':');
-const parsedProxyEndpoint = parseUrl(auth.authorizationData[0].proxyEndpoint);
-const registry = parsedProxyEndpoint.host;
-
-run(`docker login -u ${username} -p ${password} ${auth.authorizationData[0].proxyEndpoint}`, { hide: true });
-
-core.setOutput('username', username);
-core.setOutput('password', password);
-core.setOutput('registry', registry);
-
 const accountData = run(`aws sts get-caller-identity --output json --region ${awsRegion}`);
 const awsAccountId = JSON.parse(accountData).Account;
 
+const accountLoginPassword = `aws ecr get-login-password --region ${awsRegion}`;
+run(
+    `${accountLoginPassword} | docker login --username AWS --password-stdin ${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com`
+);
+
+core.setOutput('registry', `${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com`);
 core.setOutput('account', awsAccountId);
