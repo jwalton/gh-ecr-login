@@ -35,7 +35,7 @@ function loginToEcr(awsRegion, awsAccessKeyId, awsSecretAccessKey) {
     return { awsAccountId };
 }
 exports.loginToEcr = loginToEcr;
-
+//# sourceMappingURL=lib.js.map
 
 /***/ }),
 
@@ -56,7 +56,7 @@ const awsRegion = core_1.default.getInput('region') || process.env.AWS_DEFAULT_R
 const { awsAccountId } = (0, lib_1.loginToEcr)(awsRegion, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY);
 core_1.default.setOutput('registry', `${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com`);
 core_1.default.setOutput('account', awsAccountId);
-
+//# sourceMappingURL=main.js.map
 
 /***/ }),
 

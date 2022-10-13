@@ -2,13 +2,16 @@
     "name": "gh-ecr-login",
     "version": "2.0.1",
     "description": "Publish docker images to Amazon Elastic Container Registry (ECR).",
-    "main": "lib/main.js",
+    "main": "lib/lib.js",
+    "files": [
+        "lib/**/*"
+    ],
     "scripts": {
         "build": "tsc",
         "clean": "rm -rf lib dist",
         "format": "prettier --write \"**/*.ts\"",
         "lint": "eslint src/**/*.ts",
-        "package": "ncc build --source-map --license licenses.txt",
+        "package": "ncc build --source-map --license licenses.txt lib/main.js",
         "all": "npm run format && npm run clean && npm run build && npm run lint && npm run package",
         "semantic-release": "semantic-release"
     },
