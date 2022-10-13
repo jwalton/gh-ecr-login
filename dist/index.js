@@ -7,7 +7,7 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.loginToEcr = exports.run = void 0;
+exports.loginToEcr = void 0;
 const child_process_1 = __nccwpck_require__(81);
 function run(cmd, options = {}) {
     if (!options.hide) {
@@ -19,7 +19,6 @@ function run(cmd, options = {}) {
         env: Object.assign(Object.assign({}, process.env), options.env),
     });
 }
-exports.run = run;
 function loginToEcr(awsRegion, awsAccessKeyId, awsSecretAccessKey) {
     const env = {
         AWS_PAGER: '',
