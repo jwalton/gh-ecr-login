@@ -18,7 +18,7 @@ outputs:
     description: ECR registry hostname (e.g. 000000000000.dkr.ecr.us-east-1.amazonaws.com)
 runs:
   using: node12
-  main: 'main.js'
+  main: 'dist/index.js'
 branding:
   icon: log-in
   color: orange
