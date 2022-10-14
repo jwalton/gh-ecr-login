@@ -43,18 +43,38 @@ exports.loginToEcr = loginToEcr;
 
 "use strict";
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core_1 = __importDefault(__nccwpck_require__(186));
+const core = __importStar(__nccwpck_require__(186));
 const lib_1 = __nccwpck_require__(223);
-const AWS_ACCESS_KEY_ID = core_1.default.getInput('access-key-id', { required: true });
-const AWS_SECRET_ACCESS_KEY = core_1.default.getInput('secret-access-key', { required: true });
-const awsRegion = core_1.default.getInput('region') || process.env.AWS_DEFAULT_REGION || 'us-east-1';
+const AWS_ACCESS_KEY_ID = core.getInput('access-key-id', { required: true });
+const AWS_SECRET_ACCESS_KEY = core.getInput('secret-access-key', { required: true });
+const awsRegion = core.getInput('region') || process.env.AWS_DEFAULT_REGION || 'us-east-1';
 const { awsAccountId } = (0, lib_1.loginToEcr)(awsRegion, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY);
-core_1.default.setOutput('registry', `${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com`);
-core_1.default.setOutput('account', awsAccountId);
+core.setOutput('registry', `${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com`);
+core.setOutput('account', awsAccountId);
 //# sourceMappingURL=main.js.map
 
 /***/ }),
