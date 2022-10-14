@@ -1,4 +1,4 @@
-import core from '@actions/core';
+import * as core from '@actions/core';
 import { loginToEcr } from './lib';
 
 const AWS_ACCESS_KEY_ID = core.getInput('access-key-id', { required: true });
