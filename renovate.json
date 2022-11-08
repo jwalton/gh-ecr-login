@@ -1,6 +1,10 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": ["config:base"],
+    "lockFileMaintenance": {
+        "enabled": true,
+        "schedule": ["before 5am on tuesday"]
+    },
     "packageRules": [
         {
             "matchDepTypes": ["devDependencies"],
