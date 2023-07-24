@@ -26,3 +26,21 @@ to your GitHub project:
     docker tag my-image ${{ steps.ecr.outputs.account }}.dkr.ecr.us-east-1.amazonaws.com/my-image:v1
     docker push ${{ steps.ecr.outputs.account }}.dkr.ecr.us-east-1.amazonaws.com/my-image:v1
 ```
+
+```yaml
+# Without explicit credentials
+- name: Configure AWS Credentials
+  uses: aws-actions/configure-aws-credentials@v2
+  with:
+    role-to-assume: arn:aws:iam::1234567890:role/ecr-builder
+    aws-region: us-east-1
+- name: Login to ECR
+  id: ecr
+  uses: jwalton/gh-ecr-login@v1
+  with:
+    region: us-east-1
+- name: Push to ECR
+  run: |
+    docker tag my-image ${{ steps.ecr.outputs.account }}.dkr.ecr.us-east-1.amazonaws.com/my-image:v1
+    docker push ${{ steps.ecr.outputs.account }}.dkr.ecr.us-east-1.amazonaws.com/my-image:v1
+```

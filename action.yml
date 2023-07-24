@@ -3,10 +3,10 @@ author: jwalton
 description: Login to Amazon ECR.
 inputs:
   access-key-id:
-    required: true
+    required: false
     description: Access key for IAM User.
   secret-access-key:
-    required: true
+    required: false
     description: Secret access key for IAM User.
   region:
     description: AWS Region to use.

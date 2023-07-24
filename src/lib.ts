@@ -14,12 +14,21 @@ function run(cmd: string, options: { env?: Record<string, string>; hide?: boolea
     });
 }
 
-export function loginToEcr(awsRegion: string, awsAccessKeyId: string, awsSecretAccessKey: string) {
-    const env = {
+export function loginToEcr(
+    awsRegion: string,
+    awsAccessKeyId: string | undefined,
+    awsSecretAccessKey: string | undefined
+) {
+    const env: Record<string, string> = {
         AWS_PAGER: '', // Disable the pager.
-        AWS_ACCESS_KEY_ID: awsAccessKeyId,
-        AWS_SECRET_ACCESS_KEY: awsSecretAccessKey,
     };
+
+    if (awsAccessKeyId) {
+        env.AWS_ACCESS_KEY_ID = awsAccessKeyId;
+    }
+    if (awsSecretAccessKey) {
+        env.AWS_SECRET_ACCESS_KEY = awsSecretAccessKey;
+    }
 
     const accountData = run(`aws sts get-caller-identity --output json --region ${awsRegion}`, {
         env,

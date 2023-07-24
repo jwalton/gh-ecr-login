@@ -21,10 +21,14 @@ function run(cmd, options = {}) {
 }
 function loginToEcr(awsRegion, awsAccessKeyId, awsSecretAccessKey) {
     const env = {
-        AWS_PAGER: '',
-        AWS_ACCESS_KEY_ID: awsAccessKeyId,
-        AWS_SECRET_ACCESS_KEY: awsSecretAccessKey,
+        AWS_PAGER: '', // Disable the pager.
     };
+    if (awsAccessKeyId) {
+        env.AWS_ACCESS_KEY_ID = awsAccessKeyId;
+    }
+    if (awsSecretAccessKey) {
+        env.AWS_SECRET_ACCESS_KEY = awsSecretAccessKey;
+    }
     const accountData = run(`aws sts get-caller-identity --output json --region ${awsRegion}`, {
         env,
     });
@@ -69,8 +73,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(186));
 const lib_1 = __nccwpck_require__(223);
-const AWS_ACCESS_KEY_ID = core.getInput('access-key-id', { required: true });
-const AWS_SECRET_ACCESS_KEY = core.getInput('secret-access-key', { required: true });
+const AWS_ACCESS_KEY_ID = core.getInput('access-key-id') || undefined;
+const AWS_SECRET_ACCESS_KEY = core.getInput('secret-access-key') || undefined;
 const awsRegion = core.getInput('region') || process.env.AWS_DEFAULT_REGION || 'us-east-1';
 const { awsAccountId } = (0, lib_1.loginToEcr)(awsRegion, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY);
 core.setOutput('registry', `${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com`);
