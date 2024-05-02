@@ -17,7 +17,7 @@ outputs:
   registry:
     description: ECR registry hostname (e.g. 000000000000.dkr.ecr.us-east-1.amazonaws.com)
 runs:
-  using: node16
+  using: 'node20'
   main: 'dist/index.js'
 branding:
   icon: log-in

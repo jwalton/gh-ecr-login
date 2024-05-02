@@ -73,12 +73,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(186));
 const lib_1 = __nccwpck_require__(223);
+const node_fs_1 = __nccwpck_require__(561);
+const node_os_1 = __nccwpck_require__(612);
 const AWS_ACCESS_KEY_ID = core.getInput('access-key-id') || undefined;
 const AWS_SECRET_ACCESS_KEY = core.getInput('secret-access-key') || undefined;
 const awsRegion = core.getInput('region') || process.env.AWS_DEFAULT_REGION || 'us-east-1';
 const { awsAccountId } = (0, lib_1.loginToEcr)(awsRegion, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY);
-core.setOutput('registry', `${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com`);
-core.setOutput('account', awsAccountId);
+(0, node_fs_1.writeFileSync)(process.env['GITHUB_OUTPUT'], `registry=${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com${node_os_1.EOL}account=${awsAccountId}${node_os_1.EOL}`, { flag: 'a' });
 //# sourceMappingURL=main.js.map
 
 /***/ }),
@@ -2846,6 +2847,22 @@ module.exports = require("https");
 
 "use strict";
 module.exports = require("net");
+
+/***/ }),
+
+/***/ 561:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:fs");
+
+/***/ }),
+
+/***/ 612:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:os");
 
 /***/ }),
 
