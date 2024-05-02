@@ -16,7 +16,7 @@ to your GitHub project:
 ```yaml
 - name: Login to ECR
   id: ecr
-  uses: jwalton/gh-ecr-login@v1
+  uses: jwalton/gh-ecr-login@v3
   with:
     access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
     secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -36,7 +36,7 @@ to your GitHub project:
     aws-region: us-east-1
 - name: Login to ECR
   id: ecr
-  uses: jwalton/gh-ecr-login@v1
+  uses: jwalton/gh-ecr-login@v3
   with:
     region: us-east-1
 - name: Push to ECR
