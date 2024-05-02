@@ -3,6 +3,7 @@
     "version": "2.1.1",
     "description": "Publish docker images to Amazon Elastic Container Registry (ECR).",
     "main": "lib/lib.js",
+    "type": "module",
     "files": [
         "lib/**/*"
     ],
@@ -10,7 +11,7 @@
         "build": "tsc",
         "clean": "rm -rf lib dist",
         "format": "prettier --write \"**/*.ts\"",
-        "lint": "eslint src/**/*.ts",
+        "lint": "eslint src",
         "package": "ncc build --source-map --license licenses.txt lib/main.js",
         "all": "npm run format && npm run clean && npm run build && npm run lint && npm run package",
         "semantic-release": "semantic-release"
@@ -37,17 +38,19 @@
         "@actions/core": "^1.10.0"
     },
     "devDependencies": {
+        "@eslint/js": "^9.1.1",
         "@semantic-release/exec": "^6.0.3",
         "@semantic-release/git": "^10.0.1",
         "@types/node": "^20.0.0",
-        "@typescript-eslint/eslint-plugin": "^7.0.0",
-        "@typescript-eslint/parser": "^7.0.0",
         "@vercel/ncc": "^0.38.0",
-        "eslint": "^8.25.0",
-        "eslint-config-prettier": "^9.0.0",
-        "eslint-plugin-jest": "^27.1.1",
+        "eslint": "^8.57.0",
+        "eslint-plugin-import": "^2.29.1",
         "prettier": "^3.0.0",
         "semantic-release": "^23.0.0",
-        "typescript": "^5.0.0"
+        "typescript": "^5.0.0",
+        "typescript-eslint": "^7.8.0"
+    },
+    "volta": {
+        "node": "20.12.2"
     }
 }

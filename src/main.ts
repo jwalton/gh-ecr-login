@@ -1,5 +1,5 @@
 import * as core from '@actions/core';
-import { loginToEcr } from './lib';
+import { loginToEcr } from './lib.js';
 
 const AWS_ACCESS_KEY_ID = core.getInput('access-key-id') || undefined;
 const AWS_SECRET_ACCESS_KEY = core.getInput('secret-access-key') || undefined;

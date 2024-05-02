@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
 
-function run(cmd: string, options: { env?: Record<string, string>; hide?: boolean } = {}) {
+function run(cmd: string, options: { env?: Record<string, string>; hide?: boolean } = {}): string {
     if (!options.hide) {
         console.log(`$ ${cmd}`);
     }
@@ -18,7 +18,7 @@ export function loginToEcr(
     awsRegion: string,
     awsAccessKeyId: string | undefined,
     awsSecretAccessKey: string | undefined
-) {
+): { awsAccountId: string } {
     const env: Record<string, string> = {
         AWS_PAGER: '', // Disable the pager.
     };
