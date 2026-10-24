@@ -1,6 +1,6 @@
 {
     "name": "gh-ecr-login",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "description": "Publish docker images to Amazon Elastic Container Registry (ECR).",
     "main": "lib/lib.js",
     "type": "module",
